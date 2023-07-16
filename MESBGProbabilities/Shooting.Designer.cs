@@ -67,7 +67,6 @@
             this.WoodElfTarget = new System.Windows.Forms.RadioButton();
             this.manualTargetBox = new System.Windows.Forms.GroupBox();
             this.TargetDefenceLab = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.TargetNameLabel = new System.Windows.Forms.Label();
             this.targetName = new System.Windows.Forms.TextBox();
             this.moveBox = new System.Windows.Forms.GroupBox();
@@ -86,6 +85,7 @@
             this.noMight = new System.Windows.Forms.RadioButton();
             this.numOfModelLabel = new System.Windows.Forms.Label();
             this.numOfModel = new System.Windows.Forms.NumericUpDown();
+            this.targetDefence = new System.Windows.Forms.NumericUpDown();
             this.chooseArcher.SuspendLayout();
             this.ManualArcherBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shootValue)).BeginInit();
@@ -100,6 +100,7 @@
             this.accuracyBox.SuspendLayout();
             this.useMightBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOfModel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.targetDefence)).BeginInit();
             this.SuspendLayout();
             // 
             // shoot
@@ -147,6 +148,7 @@
             // BlackrootVale
             // 
             this.BlackrootVale.AutoSize = true;
+            this.BlackrootVale.Checked = true;
             this.BlackrootVale.Location = new System.Drawing.Point(0, 19);
             this.BlackrootVale.Name = "BlackrootVale";
             this.BlackrootVale.Size = new System.Drawing.Size(133, 17);
@@ -226,6 +228,16 @@
             // shootValue
             // 
             this.shootValue.Location = new System.Drawing.Point(116, 37);
+            this.shootValue.Maximum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.shootValue.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.shootValue.Name = "shootValue";
             this.shootValue.Size = new System.Drawing.Size(79, 20);
             this.shootValue.TabIndex = 28;
@@ -238,6 +250,16 @@
             // bowStrength
             // 
             this.bowStrength.Location = new System.Drawing.Point(215, 36);
+            this.bowStrength.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.bowStrength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.bowStrength.Name = "bowStrength";
             this.bowStrength.Size = new System.Drawing.Size(84, 20);
             this.bowStrength.TabIndex = 27;
@@ -439,6 +461,7 @@
             // Orc
             // 
             this.Orc.AutoSize = true;
+            this.Orc.Checked = true;
             this.Orc.Location = new System.Drawing.Point(318, 19);
             this.Orc.Name = "Orc";
             this.Orc.Size = new System.Drawing.Size(87, 17);
@@ -534,8 +557,8 @@
             // 
             // manualTargetBox
             // 
+            this.manualTargetBox.Controls.Add(this.targetDefence);
             this.manualTargetBox.Controls.Add(this.TargetDefenceLab);
-            this.manualTargetBox.Controls.Add(this.textBox1);
             this.manualTargetBox.Controls.Add(this.TargetNameLabel);
             this.manualTargetBox.Controls.Add(this.targetName);
             this.manualTargetBox.Location = new System.Drawing.Point(16, 394);
@@ -553,13 +576,6 @@
             this.TargetDefenceLab.Size = new System.Drawing.Size(82, 13);
             this.TargetDefenceLab.TabIndex = 3;
             this.TargetDefenceLab.Text = "Target Defence";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(112, 36);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 2;
             // 
             // TargetNameLabel
             // 
@@ -755,10 +771,37 @@
             // numOfModel
             // 
             this.numOfModel.Location = new System.Drawing.Point(129, 242);
+            this.numOfModel.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numOfModel.Name = "numOfModel";
             this.numOfModel.Size = new System.Drawing.Size(106, 20);
             this.numOfModel.TabIndex = 25;
             this.numOfModel.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // targetDefence
+            // 
+            this.targetDefence.Location = new System.Drawing.Point(113, 36);
+            this.targetDefence.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.targetDefence.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.targetDefence.Name = "targetDefence";
+            this.targetDefence.Size = new System.Drawing.Size(106, 20);
+            this.targetDefence.TabIndex = 26;
+            this.targetDefence.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -787,6 +830,7 @@
             this.Controls.Add(this.useMightBox);
             this.Name = "Shooting";
             this.Text = "Shooting";
+            this.Load += new System.EventHandler(this.Shooting_Load);
             this.chooseArcher.ResumeLayout(false);
             this.chooseArcher.PerformLayout();
             this.ManualArcherBox.ResumeLayout(false);
@@ -812,6 +856,7 @@
             this.useMightBox.ResumeLayout(false);
             this.useMightBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOfModel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.targetDefence)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -855,7 +900,6 @@
         private System.Windows.Forms.RadioButton WitchKing;
         private System.Windows.Forms.GroupBox manualTargetBox;
         private System.Windows.Forms.Label TargetDefenceLab;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label TargetNameLabel;
         private System.Windows.Forms.TextBox targetName;
         private System.Windows.Forms.GroupBox moveBox;
@@ -877,6 +921,7 @@
         private System.Windows.Forms.NumericUpDown shootValue;
         private System.Windows.Forms.NumericUpDown bowStrength;
         private System.Windows.Forms.Label bowStrengthLabel;
+        private System.Windows.Forms.NumericUpDown targetDefence;
     }
 }
 

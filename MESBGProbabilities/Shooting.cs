@@ -47,6 +47,12 @@ namespace MESBGProbabilities
                 }
 
             }
+            
+            if (manualTarget.Checked)
+            {
+                target = new Model(targetName.Text, (int)targetDefence.Value);
+            }
+
             result.Visible = true;
             if (isHero)
             {
@@ -344,7 +350,11 @@ namespace MESBGProbabilities
 
         private void Shooting_Load(object sender, EventArgs e)
         {
+            //Initialize pre selected archer and target
+            archer = new Warrior("Blackroot Vale Archer", 3, 2, false, true, true, false);
+            isHero = false;
 
+            target = new Model("Moranon Orcs", 5);
         }
     }
 }
