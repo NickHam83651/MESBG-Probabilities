@@ -66,7 +66,7 @@ namespace MESBGProbabilities
                 //normal output
                 else
                 {
-                    result.Text = $"The probalbe result of {hero.Name}(s) shooting at {target.Name}(s) is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
+                    result.Text = $"The probable result of {hero.Name}(s) shooting at {target.Name}(s) is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
                 }
 
             }
@@ -85,7 +85,7 @@ namespace MESBGProbabilities
                 else
                 {
 
-                    result.Text = $"The probalbe result of {(int)numOfModel.Value} {archer.Name}(s) shooting at {target.Name}(s) is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
+                    result.Text = $"The probable result of {(int)numOfModel.Value} {archer.Name}(s) shooting at {target.Name}(s) is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
                 }
 
             }
