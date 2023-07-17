@@ -77,7 +77,12 @@ namespace MESBG_Probabilities
         //Value needed to get value or higher on a D6 dice
         public double ProbOfRoll(int value, int modify)
         {
-            if (value - modify <= 0)
+            //I put -99 in wound chart to show where something can't be wounded
+            if(value == -99)
+            {
+                return -99;
+            }
+            else if (value - modify <= 0)
             {
                 return (7 - value) / 6.0;
             }
@@ -108,6 +113,15 @@ namespace MESBG_Probabilities
 
             }
 
+            if (ProbTotalHits > 1)
+            {
+                ProbTotalHits = 1;
+            }
+            else if(ProbTotalHits < 0)
+            {
+                ProbTotalHits = 0;
+            }
+
 
             // Determine In Way Probability
             if (heroicAcuracy == true)
@@ -115,32 +129,43 @@ namespace MESBG_Probabilities
                 //heroic acuracy allows reroll of failed in ways
                 ProbTotalHits *= ProbOfRoll(inWay, modifyInWay);
                 ProbTotalHits += ProbTotalHits * (1.0 - ProbOfRoll(inWay, modifyInWay));
-                //Console.WriteLine(ProbTotalHits);
             }
             else
             {
                 ProbTotalHits = ProbTotalHits * ProbOfRoll(inWay, modifyInWay);
-                //Console.WriteLine(ProbTotalHits);
             }
+
+            if (ProbTotalHits > 1)
+            {
+                ProbTotalHits = 1;
+            }
+            else if (ProbTotalHits < 0)
+            {
+                ProbTotalHits = 0;
+            }
+
 
             // Determine To Wound Probability
             if (target.Defence - BowStrength >= 5)
             {
                 //if the target has a high enough defence then you need to roll a 6 then get some other number depending on values
-                //Console.WriteLine(ProbTotalHits);
                 ProbTotalHits = ProbTotalHits * DetermineProb(6, RerollToWoundAll, RerollToWoundOnes, modifyToWound);
-                //Console.WriteLine(ProbTotalHits);
                 ProbTotalHits = ProbTotalHits * DetermineProb(WoundChart[BowStrength, target.Defence], RerollToWoundAll, RerollToWoundOnes, modifyToWound);
-                //Console.WriteLine(ProbTotalHits);
             }
             else
             {
                 ProbTotalHits = ProbTotalHits * DetermineProb(WoundChart[BowStrength, target.Defence], RerollToWoundAll, RerollToWoundOnes, modifyToWound);
             }
-            //Console.WriteLine(ProbTotalHits);
 
+            if (ProbTotalHits > 1)
+            {
+                ProbTotalHits = 1;
+            }
+            else if (ProbTotalHits < 0)
+            {
+                ProbTotalHits = 0;
+            }
 
-            //Console.WriteLine($"Ther probalbe result of {Name} shooting at {target.Name} is {decimal.Round((decimal)ProbTotalHits, 2, MidpointRounding.AwayFromZero)} wounds.");
             return ProbTotalHits;
         }
 

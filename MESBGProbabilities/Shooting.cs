@@ -60,13 +60,41 @@ namespace MESBGProbabilities
                 // can't wound output
                 if (probableWounds <= 0)
                 {
-                    result.Text = $"{hero.Name}(s) can not wound {target.Name}(s)";
-
+                    if(WitchKing.Checked || Sauron.Checked)
+                    {
+                        result.Text = $"{hero.Name} can not wound {target.Name}";
+                    }
+                    else if (manualTarget.Checked)
+                    {
+                        result.Text = $"{hero.Name} can not wound {target.Name}(s)";
+                    }
+                    else
+                    {
+                        result.Text = $"{hero.Name} can not wound {target.Name}s";
+                    }
                 }
+
                 //normal output
                 else
                 {
-                    result.Text = $"The probable result of {hero.Name}(s) shooting at {target.Name}(s) is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
+                    if (probableWounds <= 0)
+                    {
+                        if (WitchKing.Checked || Sauron.Checked)
+                        {
+                            result.Text = $"The probable result of {hero.Name} shooting at {target.Name} is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
+
+                        }
+                        else if (manualTarget.Checked)
+                        {
+                            result.Text = $"The probable result of {hero.Name} shooting at {target.Name}(s) is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
+
+                        }
+                        else
+                        {
+                            result.Text = $"The probable result of {hero.Name} shooting at {target.Name}s is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
+
+                        }
+                    }
                 }
 
             }
@@ -78,16 +106,84 @@ namespace MESBGProbabilities
                 // can't wound output
                 if (probableWounds <= 0)
                 {
-                    result.Text = $"{archer.Name}(s) can not wound {target.Name}(s)";
+                    if (numOfModel.Value == 1)
+                    {
+                        if (WitchKing.Checked || Sauron.Checked)
+                        {
+                            result.Text = $"{archer.Name} can not wound {target.Name}";
+
+                        }
+                        else if (manualTarget.Checked)
+                        {
+                            result.Text = $"{archer.Name} can not wound {target.Name}(s)";
+
+                        }
+                        else
+                        {
+                            result.Text = $"{archer.Name} can not wound {target.Name}s";
+                        }
+                        
+                    }
+                    else
+                    {
+                        if (WitchKing.Checked || Sauron.Checked)
+                        {
+                            result.Text = $"{archer.Name}s can not wound {target.Name}";
+
+                        }
+                        else if (manualTarget.Checked)
+                        {
+                            result.Text = $"{archer.Name}s can not wound {target.Name}(s)";
+
+                        }
+                        else
+                        {
+                            result.Text = $"{archer.Name}s can not wound {target.Name}s";
+                        }
+
+
+                    }
 
                 }
                 //normal output
                 else
                 {
+                    if (numOfModel.Value == 1)
+                    {
+                        if (WitchKing.Checked || Sauron.Checked)
+                        {
+                            result.Text = $"The probable result of {(int)numOfModel.Value} {archer.Name} shooting at {target.Name} is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
 
-                    result.Text = $"The probable result of {(int)numOfModel.Value} {archer.Name}(s) shooting at {target.Name}(s) is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
+                        }
+                        else if (manualTarget.Checked)
+                        {
+                            result.Text = $"The probable result of {(int)numOfModel.Value} {archer.Name} shooting at {target.Name}(s) is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
+
+                        }
+                        else
+                        {
+                            result.Text = $"The probable result of {(int)numOfModel.Value} {archer.Name} shooting at {target.Name}s is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
+                        }
+
+                    }
+                    else
+                    {
+                        if (WitchKing.Checked || Sauron.Checked)
+                        {
+                            result.Text = $"The probable result of {(int)numOfModel.Value} {archer.Name}s shooting at {target.Name} is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
+
+                        }
+                        else if (manualTarget.Checked)
+                        {
+                            result.Text = $"The probable result of {(int)numOfModel.Value} {archer.Name}s shooting at {target.Name}(s) is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
+
+                        }
+                        else
+                        {
+                            result.Text = $"The probable result of {(int)numOfModel.Value} {archer.Name}s shooting at {target.Name}s is {decimal.Round((decimal)probableWounds, 2, MidpointRounding.AwayFromZero)} wounds.";
+                        }
+                    }
                 }
-
             }
         }
 
@@ -126,7 +222,7 @@ namespace MESBGProbabilities
 
         private void WEW_CheckedChanged(object sender, EventArgs e)
         {
-            archer = new Warrior("Wood Elf Warriors", 3, 3, false, false, false, false);
+            archer = new Warrior("Wood Elf Warrior", 3, 3, false, false, false, false);
             isHero = false;
             ManualArcherBox.Visible = false;
             reRollChoiceBox.Visible = false;
@@ -206,7 +302,7 @@ namespace MESBGProbabilities
         //create and populate Blackroot Vale Archers as target
         private void BRVTarget_CheckedChanged(object sender, EventArgs e)
         {
-            target = new Model("Blackroot Vale Archers", 4);
+            target = new Model("Blackroot Vale Archer", 4);
             manualTargetBox.Visible = false;
 
         }
@@ -214,7 +310,7 @@ namespace MESBGProbabilities
         //create and populate Moranon Orcs as target
         private void OrcTarget_CheckedChanged(object sender, EventArgs e)
         {
-            target = new Model("Moranon Orcs", 5);
+            target = new Model("Moranon Orc", 5);
             manualTargetBox.Visible = false;
 
         }
@@ -237,7 +333,7 @@ namespace MESBGProbabilities
         //create and populate Wood Elf Warriors as target
         private void WoodElfTarget_CheckedChanged(object sender, EventArgs e)
         {
-            target = new Model("Wood Elf Warriors", 4);
+            target = new Model("Wood Elf Warrior", 4);
 
             manualTargetBox.Visible = false;
 
@@ -246,7 +342,7 @@ namespace MESBGProbabilities
         //create and populate Moria Goblins as target
         private void Goblin_CheckedChanged(object sender, EventArgs e)
         {
-            target = new Model("Moria Goblins", 4);
+            target = new Model("Moria Goblin", 4);
             manualTargetBox.Visible = false;
 
         }
@@ -354,7 +450,7 @@ namespace MESBGProbabilities
             archer = new Warrior("Blackroot Vale Archer", 3, 2, false, true, true, false);
             isHero = false;
 
-            target = new Model("Moranon Orcs", 5);
+            target = new Model("Moranon Orc", 5);
         }
     }
 }
